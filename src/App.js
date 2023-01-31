@@ -2,6 +2,7 @@
 import StoryCard from './components/StoryCard';
 import {useState} from 'react'
 import { Container, Stack, Button } from 'react-bootstrap'
+import AddStoryModal from './components/AddStoryModal'
 
 function App() {
 
@@ -19,7 +20,7 @@ function App() {
         <StoryCard/>
     </Container>
 
-    <AddStoryModal></AddStoryModal>
+    <AddStoryModal show={showAddStoryModal} handleClose={() => setShowAddStoryModal(false)}/>
     </>
 
   );

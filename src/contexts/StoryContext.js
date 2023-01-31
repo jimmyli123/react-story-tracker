@@ -10,8 +10,50 @@ export function useStoryContext() {
 
 export const StoryProvider = ({ children }) => {
     const [stories, setStories] = useLocalStorage('stories', [])
-    const [chapters, setChapters] = useLocalStorage('chapters', [])
+    const [chapters, setChapters] = useLocalStorage('chapters', "")
 
-    
-
+    function getStoryChapters (storyId) {
+        return chapters.filter(chap => chap.storyId === storyId)
+    }
+    function addStory({ name, category }) {
+        setStories(prevStories => {
+            if (prevStories.find(chapters => chapters.name === name)) {
+                return prevStories
+            }
+            return [...prevStories, { id: uuidV4(), name, category }]
+        })
+    }
+    function updateChapter ({ newChapter, storyId }) {
+        setChapters(prevChapter => {
+            if (chapters.storyId !== storyId) return chapters
+            return { ...chapters, storyId}
+        })
+    }
+    function deleteStory({ id }) {
+        setChapters(prevChapters => {
+            return prevChapters.map(chapter => {
+                if (chapter.storyId !== id) return chapter
+                else {
+                    let index = prevChapters.indexOf(chapter)
+                    prevChapters.splice(index,1)
+                }
+            })
+        })
+    }
+    function deleteChapter( { id }) {
+        setChapters(prevchapters => {
+            return prevchapters.filter(chapter => chapter.storyId !== id)
+        })
+    }
+    return (
+        <StoryContext.Provider value= {{
+            stories,
+            chapters,
+            getStoryChapters,
+            addStory,
+            updateChapter,
+            deleteStory,
+            deleteChapter
+        }}> {children} </StoryContext.Provider>
+    )
 }

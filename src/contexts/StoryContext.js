@@ -4,7 +4,7 @@ import useLocalStorage from "../hooks/useLocalStorage"
 
 const StoryContext = React.createContext()
 
-export function useStoryContext() {
+export function useStory() {
     return useContext(StoryContext)
 }
 
@@ -17,7 +17,7 @@ export const StoryProvider = ({ children }) => {
     }
     function addStory({ name, category }) {
         setStories(prevStories => {
-            if (prevStories.find(chapters => chapters.name === name)) {
+            if (prevStories.find(story => story.name === name)) {
                 return prevStories
             }
             return [...prevStories, { id: uuidV4(), name, category }]

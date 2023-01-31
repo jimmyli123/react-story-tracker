@@ -1,11 +1,11 @@
 import { Form, Modal, Button } from "react-bootstrap";
 import { useRef } from "react" 
-import { useStoryContext } from "../contexts/StoryContext";
+import { useStory } from "../contexts/StoryContext";
 
 export default function AddStoryModal({ show, handleClose }) {
     const nameRef = useRef();
     const categoryRef = useRef();
-    const { addStory } = useStoryContext()
+    const { addStory } = useStory()
     function handleSubmit(e) {
         e.preventDefault()
         addStory(
@@ -32,7 +32,7 @@ export default function AddStoryModal({ show, handleClose }) {
                             <Form.Label>
                                 Category
                             </Form.Label>
-                            <Form.Control ref={categoryRef} type="text" required/>
+                            <Form.Control ref={categoryRef} type="text"/>
                         </Form.Group>
                         <div className="d-flex justify-content-end">
                             <Button variant="primary" type="submit">Add</Button>

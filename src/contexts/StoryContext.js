@@ -4,14 +4,17 @@ import useLocalStorage from "../hooks/useLocalStorage"
 
 const StoryContext = React.createContext()
 
-export function useStory() {
+export function useStories() {
     return useContext(StoryContext)
 }
 
 export const StoryProvider = ({ children }) => {
     const [stories, setStories] = useLocalStorage('stories', [])
     const [chapters, setChapters] = useLocalStorage('chapters', "")
-
+    
+    function getStories() {
+        return stories;
+    }
     function getStoryChapters (storyId) {
         return chapters.filter(chap => chap.storyId === storyId)
     }

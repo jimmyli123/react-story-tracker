@@ -1,11 +1,11 @@
 import { Form, Modal, Button } from "react-bootstrap";
 import { useRef } from "react" 
-import { useStory } from "../contexts/StoryContext";
+import { useStories } from "../contexts/StoryContext";
 
 export default function AddStoryModal({ show, handleClose }) {
     const nameRef = useRef();
     const categoryRef = useRef();
-    const { addStory } = useStory()
+    const { addStory } = useStories()
     function handleSubmit(e) {
         e.preventDefault()
         addStory(
